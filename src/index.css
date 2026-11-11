@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+/* ============================================================================
+ * [SECTION 1: GLOBAL SPACING & RHYTHM]
+ * Strict 8px spacing scale (4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px)
+ *
+ * [SECTION 2: TYPOGRAPHIC HIERARCHY]
+ * - Page title: 20px (17px <480px), weight 600, tracking -0.02em, line-height 1.2
+ * - Section headers: 11px uppercase, weight 600, tracking 0.09em, #5A5449 / #6B665D, mb 12px
+ * - Body text: 15px (14px <480px), weight 400, line-height 1.65, #1A1815
+ * - Secondary body: 13px, weight 400, line-height 1.6, #5A5449 (WCAG AA on #F7F5F0)
+ * - Tertiary / metadata: 12px, weight 500, tracking 0.01em, #9C968A
+ * - Monospace: 12.5px, tracking 0.005em, line-height 1.55
+ * - Inline code: mono 13px, bg #F1EDE4, padding 1px 5px, radius 3px, #1A1815
+ * ============================================================================ */
+
+@layer base {
+  :root {
+    --bg-canvas: #F7F5F0;
+    --bg-surface: #FFFFFF;
+    --bg-code: #F1EDE4;
+    --border-warm: #E5E1D8;
+    --border-warm-sticky: #D8D3C7;
+    --text-primary: #1A1815;
+    --text-secondary: #5A5449;
+    --text-secondary-muted: #6B665D;
+    --text-tertiary: #9C968A;
+    --accent-forest: #2D5A3D;
+    --accent-forest-hover: #264A33;
+    --danger-brick: #8B3A2E;
+    --warning-ochre: #8A6A2F;
+  }
+
+  * {
+    box-sizing: border-box;
+    border-color: #E5E1D8;
+  }
+
+  /* [SECTION 4: CONTRAST & FOCUS — Selection color] */
+  ::selection {
+    background-color: #2D5A3D;
+    color: #FFFFFF;
+  }
+
+  html,
+  body {
+    background-color: #F7F5F0;
+    color: #1A1815;
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* [SECTION 12: MOBILE — PROPORTIONAL (< 480px font scaling)] */
+  @media (max-width: 479px) {
+    html,
+    body {
+      font-size: 14px;
+    }
+  }
+
+  code,
+  pre,
+  textarea.font-mono,
+  .font-mono {
+    font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.005em;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* [SECTION 4: CONTRAST & FOCUS — Consistent 2px solid #2D5A3D focus ring] */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  [role="button"]:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #2D5A3D;
+    outline-offset: 2px;
+    box-shadow: none;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* [SECTION 2: TYPOGRAPHIC HIERARCHY — Tier utilities] */
+.type-page-title {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #1A1815;
+}
+
+@media (max-width: 479px) {
+  .type-page-title {
+    font-size: 17px;
+  }
+}
+
+.spec-header {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #5A5449;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.type-body {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #1A1815;
+}
+
+@media (max-width: 479px) {
+  .type-body {
+    font-size: 14px;
+  }
+}
+
+.type-secondary {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #5A5449;
+}
+
+.type-tertiary {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #9C968A;
+}
+
+.type-mono {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.005em;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.inline-code-chip {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  background-color: #F1EDE4;
+  color: #1A1815;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.table-header-cell {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #5A5449;
+  font-weight: 600;
+}
+
+/* [SECTION 9: MICRO-INTERACTIONS — Restrained transitions] */
+.fade-transition {
+  animation: screenFadeIn 180ms ease-out;
+}
+
+@keyframes screenFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* [SECTION 4 & 9: Buttons — 80ms background darkening, 0.45 disabled opacity] */
+.btn-primary {
+  background-color: #2D5A3D;
+  color: #FFFFFF;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 40px;
+  transition: background-color 80ms ease-out, opacity 80ms ease-out;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #264A33;
+}
+
+.btn-primary:active:not(:disabled) {
+  background-color: #1F3D2A;
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: #1A1815;
+  border: 1px solid #E5E1D8;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  min-height: 40px;
+  transition: background-color 80ms ease-out, opacity 80ms ease-out;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #F1EDE4;
+}
+
+.btn-secondary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: #5A5449;
+  border-radius: 4px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 8px;
+  padding-right: 8px;
+  margin-left: -8px;
+  margin-right: -8px;
+  transition: background-color 80ms ease-out, color 80ms ease-out;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background-color: #F1EDE4;
+  color: #1A1815;
+}
+
+.btn-ghost:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* [SECTION 6: Textarea focus state — border #2D5A3D + subtle 3px ring] */
+.proof-textarea {
+  background-color: #FFFFFF;
+  border: 1px solid #E5E1D8;
+  border-radius: 6px;
+  padding: 16px;
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #1A1815;
+}
+
+.proof-textarea::placeholder {
+  color: #9C968A;
+  font-style: normal;
+}
+
+.proof-textarea:focus,
+.proof-textarea:focus-visible {
+  outline: none;
+  border-color: #2D5A3D;
+  box-shadow: 0 0 0 3px rgba(45, 90, 61, 0.08);
+}
+
+/* [SECTION 12: Mobile table right-edge scroll hint] */
+@media (max-width: 639px) {
+  .mobile-table-scroll-wrap {
+    position: relative;
+  }
+  .mobile-table-scroll-wrap::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 24px;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.92), transparent);
+  }
+}

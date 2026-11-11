@@ -1,0 +1,6 @@
+{
+  "name": "Coordination Verifier",
+  "description": "An independent, client-side verification tool for Tashi Network's Proof of Coordination records.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
